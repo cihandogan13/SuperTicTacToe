@@ -2,7 +2,7 @@ import numpy as np
 
 class MiniBoard:
     def __init__(self):
-        self.Board = np.zeros((3, 3))
+        self.Board = np.arange(-9, 0).reshape(3,3)
         self.isResolved = False
         self.winner = -1
 
@@ -62,48 +62,48 @@ class MiniBoard:
         
         
 
-#test
-if __name__=="__main__":
-    for index in range(0,3):
-        board = MiniBoard()
-        board.Board = np.array([[-1,-2,-3],[-3,-2,-1], [-2,-1,-3]])
-        print(board.addMove(index,0,1))
-        print(board.Board)
-        print(board.addMove(index,1,1))
-        print(board.Board)
-        print(board.addMove(index,2,1))
-        print(board.Board)
+# #test
+# if __name__=="__main__":
+#     for index in range(0,3):
+#         board = MiniBoard()
+#         
+#         print(board.addMove(index,0,1))
+#         print(board.Board)
+#         print(board.addMove(index,1,1))
+#         print(board.Board)
+#         print(board.addMove(index,2,1))
+#         print(board.Board)
     
-    print("#########################################################")
-    for index in range(0,3):
-        board = MiniBoard()
-        board.Board = np.array([[-1,-2,-3],[-3,-2,-1], [-2,-1,-3]])
-        print(board.addMove(0,index,1))
-        print(board.Board)
-        print(board.addMove(1,index,1))
-        print(board.Board)
-        print(board.addMove(2,index,1))
-        print(board.Board)
+#     print("#########################################################")
+#     for index in range(0,3):
+#         board = MiniBoard()
+#         
+#         print(board.addMove(0,index,1))
+#         print(board.Board)
+#         print(board.addMove(1,index,1))
+#         print(board.Board)
+#         print(board.addMove(2,index,1))
+#         print(board.Board)
 
 
-    print("#########################################################")
-    board = MiniBoard()
-    board.Board = np.array([[-1,-2,-3],[-3,-2,-1], [-2,-1,-3]])
-    print(board.addMove(0,0,1))
-    print(board.Board)
-    print(board.addMove(1,1,1))
-    print(board.Board)
-    print(board.addMove(2,2,1))
-    print(board.Board)
+#     print("#########################################################")
+#     board = MiniBoard()
+#     
+#     print(board.addMove(0,0,1))
+#     print(board.Board)
+#     print(board.addMove(1,1,1))
+#     print(board.Board)
+#     print(board.addMove(2,2,1))
+#     print(board.Board)
 
-    print("#########################################################")
-    board = MiniBoard()
-    board.Board = np.array([[-1,-2,-3],[-3,-2,-1], [-2,-1,-3]])
-    print(board.addMove(0,2,1))
-    print(board.Board)
-    print(board.addMove(1,1,1))
-    print(board.Board)
-    print(board.addMove(2,0,1))
-    print(board.Board)
+#     print("#########################################################")
+#     board = MiniBoard()
+#     
+#     print(board.addMove(0,2,1))
+#     print(board.Board)
+#     print(board.addMove(1,1,1))
+#     print(board.Board)
+#     print(board.addMove(2,0,1))
+#     print(board.Board)
 
     
