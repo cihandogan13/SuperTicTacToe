@@ -7,10 +7,10 @@ class MiniBoard:
         self.winner = -1
 
     def addMove(self, moveCoordX, moveCoordY, playerId):
-        if not self.isResolved:
+        if not self.isResolved and self.Board[moveCoordX, moveCoordY] < 0:
             self.Board[moveCoordX, moveCoordY] = playerId
             return self.checkForWin()
-        else:
+        else: #to do add illegal move check and throw error instead of true false  create status codes
             return True
 
     def checkForWin(self):

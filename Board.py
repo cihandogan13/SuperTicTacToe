@@ -18,7 +18,7 @@ class Board:
             #update the main game according to resolution of minigame
             if result:
                 if(self.Boards[9].addMove(Xcoord, Ycoord, playerId)):
-                    self.winner = True # add a function that checks if the games is finished after every move
+                    self.winner = self.Boards[9].Board[Xcoord, Ycoord] # add a function that checks if the games is finished after every move
                 #check after this if the game is finished or not
             return result
         else:
