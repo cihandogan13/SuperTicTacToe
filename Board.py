@@ -1,4 +1,5 @@
 from MiniBoard import MiniBoard
+from Status import Status
 class Board:
     def __init__(self):
         self.Boards = []
@@ -13,16 +14,17 @@ class Board:
 
     def addMove(self, Xcoord, Ycoord, Zcoord, Tcoord, playerId):
         currentBoard = self.Boards[Xcoord*3 + Ycoord]
-        if not currentBoard.isResolved:
-            result = currentBoard.addMove(Zcoord, Tcoord, playerId)
-            #update the main game according to resolution of minigame
-            if result:
-                if(self.Boards[9].addMove(Xcoord, Ycoord, playerId)):
-                    self.winner = self.Boards[9].Board[Xcoord, Ycoord] # add a function that checks if the games is finished after every move
-                #check after this if the game is finished or not
-            return result
-        else:
-            return None # return None so that game won't let you the play resolved minigame
+        
+        result = currentBoard.addMove(Zcoord, Tcoord, playerId)
+        #update the main game according to resolution of minigame
+        if result == Status.RESOLVED:
+            status = self.Boards[9].addMove(Xcoord, Ycoord, playerId)
+            if status == Status.RESOLVED:
+                self.winner = self.Boards[9].Board[Xcoord, Ycoord] # add a function that checks if the games is finished after every move
+                result = Status.FINISHED
+            #check after this if the game is finished or not
+        return result
+        
 
 
 # #test

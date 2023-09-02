@@ -1,4 +1,5 @@
 import numpy as np
+from Status import Status 
 
 class MiniBoard:
     def __init__(self):
@@ -7,11 +8,16 @@ class MiniBoard:
         self.winner = -1
 
     def addMove(self, moveCoordX, moveCoordY, playerId):
-        if not self.isResolved and self.Board[moveCoordX, moveCoordY] < 0:
+        if self.isResolved or (not self.isResolved and self.Board[moveCoordX, moveCoordY] >= 0):
+            return Status.ILLEGAL_MOVE
+        elif not self.isResolved and self.Board[moveCoordX, moveCoordY] < 0:
             self.Board[moveCoordX, moveCoordY] = playerId
-            return self.checkForWin()
-        else: #to do add illegal move check and throw error instead of true false  create status codes
-            return True
+
+            if self.checkForWin():
+                return Status.RESOLVED
+            else:
+                return Status.NOT_RESOLVED
+        
 
     def checkForWin(self):
         self.isResolved, self.Winner = self.checkRows()
