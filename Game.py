@@ -44,9 +44,63 @@ class Game:
     def play(self):
         #add input check (for now until gui)
         zCoord, tCoord = None, None
-        while(self.lastMoveStatus != Status.FINISHED): #to do last game status check
+        while(self.lastMoveStatus != Status.FINISHED and self.lastMoveStatus != Status.TIE): #to do last game status check
             self.board.printBoard()
             zCoord, tCoord = self.addPlayerMove( zCoord, tCoord)
             self.currentPlayer = (self.currentPlayer + 1) % 2
         self.winner = self.board.winner
         print(self.winner)
+
+
+# #test
+if __name__=="__main__":
+    game = Game()   
+    print(game.board.addMove(0,0,0,0,1))
+    print(game.board.addMove(0,0,0,1,1))
+    print(game.board.addMove(0,0,0,2,1))
+    game.board.printBoard()
+
+    print(game.board.addMove(0,1,0,0,1))
+    print(game.board.addMove(0,1,0,1,1))
+    print(game.board.addMove(0,1,0,2,1))
+    game.board.printBoard()
+
+    print(game.board.addMove(0,2,0,0,2))
+    print(game.board.addMove(0,2,0,1,2))
+    print(game.board.addMove(0,2,0,2,2))
+    game.board.printBoard()
+
+    print(game.board.addMove(1,0,0,0,2))
+    print(game.board.addMove(1,0,0,1,2))
+    print(game.board.addMove(1,0,0,2,2))
+    game.board.printBoard()
+
+    print(game.board.addMove(1,1,0,0,2))
+    print(game.board.addMove(1,1,0,1,2))
+    print(game.board.addMove(1,1,0,2,2))
+    game.board.printBoard()
+
+    print(game.board.addMove(1,2,0,0,1))
+    print(game.board.addMove(1,2,0,1,1))
+    print(game.board.addMove(1,2,0,2,1))
+    game.board.printBoard()
+
+    print(game.board.addMove(2,0,0,0,1))
+    print(game.board.addMove(2,0,0,1,1))
+    print(game.board.addMove(2,0,0,2,1))
+    game.board.printBoard()
+
+    print(game.board.addMove(2,1,0,0,1))
+    print(game.board.addMove(2,1,0,1,1))
+    print(game.board.addMove(2,1,0,2,1))
+    game.board.printBoard()
+
+    print(game.board.addMove(2,2,0,0,2))
+    print(game.board.addMove(2,2,0,1,2))
+    print(game.board.addMove(2,2,0,2,2))
+    game.board.printBoard()
+
+    game.lastMoveStatus = Status.TIE
+    game.play()
+    
+

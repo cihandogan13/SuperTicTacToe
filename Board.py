@@ -12,8 +12,6 @@ class Board:
         
 
     def printBoard(self):
-
-        #print(self.mainGame)
         output = ""
         for index in range(0,9):
             for innerIndex in range(0,9):
@@ -24,8 +22,6 @@ class Board:
             if (index == 2 or index ==5 ):
                 output += "---+---+---\n"
         print(output)
-        # for board in self.Boards:
-        #     print(board.Board)
         
 
     def addMove(self, Xcoord, Ycoord, Zcoord, Tcoord, playerId):
@@ -37,13 +33,21 @@ class Board:
             self.mainGame[Xcoord*3 + Zcoord , Ycoord*3+ Tcoord] = self.getXO(playerId, False)
         elif result == Status.RESOLVED:
             status = self.Boards[9].addMove(Xcoord, Ycoord, playerId)
-
             self.mainGame[Xcoord*3:(Xcoord+1)*3 , Ycoord*3:(Ycoord+1)*3] = self.getXO(playerId, True)
 
             if status == Status.RESOLVED:
-                self.winner = self.Boards[9].Board[Xcoord, Ycoord] # add a function that checks if the games is finished after every move
+                self.winner = self.Boards[9].Board[Xcoord, Ycoord] 
                 result = Status.FINISHED
-            #check after this if the game is finished or not
+            elif status == Status.TIE:
+                result = Status.TIE
+
+        elif result == Status.TIE:
+            status = self.Boards[9].addMove(Xcoord, Ycoord, 3) #3 for tie
+            self.mainGame[Xcoord*3:(Xcoord+1)*3 , Ycoord*3:(Ycoord+1)*3] = self.getXO(-1, True)
+            result = Status.RESOLVED
+
+            if status == Status.TIE:
+                result = Status.TIE
         return result
     
     def getXO(self, playerId, isBlock):
@@ -57,6 +61,10 @@ class Board:
                 dummy= np.array([['-', '-', '-'],
                         ['|', ' ', '|'],
                         ['-', '-', '-']])
+            elif(playerId == -1):
+                dummy= np.array([[' ', ' ', ' '],
+                        ['-', '-', '-'],
+                        [' ', ' ', ' ']])
             return dummy
         else:
             if(playerId == 1):
@@ -72,14 +80,27 @@ class Board:
 # #test
 if __name__=="__main__":
     board = Board()   
+    #X
     print(board.addMove(0,0,0,0,1))
     print(board.addMove(0,0,0,1,1))
     print(board.addMove(0,0,0,2,1))
     board.printBoard()
-
+    #O
     print(board.addMove(1,1,0,0,2))
     print(board.addMove(1,1,0,1,2))
     print(board.addMove(1,1,0,2,2))
+    board.printBoard()
+
+    #TIE
+    print(board.addMove(2,2,0,0,1))
+    print(board.addMove(2,2,0,1,1))
+    print(board.addMove(2,2,0,2,2))
+    print(board.addMove(2,2,1,0,2))
+    print(board.addMove(2,2,1,1,2))
+    print(board.addMove(2,2,1,2,1))
+    print(board.addMove(2,2,2,0,1))
+    print(board.addMove(2,2,2,1,1))
+    print(board.addMove(2,2,2,2,2))
     board.printBoard()
 
 

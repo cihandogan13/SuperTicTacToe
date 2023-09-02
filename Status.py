@@ -6,3 +6,4 @@ class Status(Enum):
     RESOLVED = 3
     FINISHED = 4
     FIRST_MOVE = 5
+    TIE = 6

@@ -11,9 +11,12 @@ class MiniBoard:
             return Status.ILLEGAL_MOVE
         elif not self.isResolved and self.Board[moveCoordX, moveCoordY] < 0:
             self.Board[moveCoordX, moveCoordY] = playerId
-
+            
             if self.checkForWin():
                 return Status.RESOLVED
+            elif all(self.Board.flatten() > 0):
+                self.isResolved = True
+                return Status.TIE
             else:
                 return Status.NOT_RESOLVED
         
