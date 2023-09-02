@@ -48,5 +48,5 @@ class Game:
             self.board.printBoard()
             zCoord, tCoord = self.addPlayerMove( zCoord, tCoord)
             self.currentPlayer = (self.currentPlayer + 1) % 2
-        self.winner
+        self.winner = self.board.winner
         print(self.winner)

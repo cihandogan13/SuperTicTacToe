@@ -5,7 +5,6 @@ class MiniBoard:
     def __init__(self):
         self.Board = np.arange(-9, 0).reshape(3,3)
         self.isResolved = False
-        self.winner = -1
 
     def addMove(self, moveCoordX, moveCoordY, playerId):
         if self.isResolved or (not self.isResolved and self.Board[moveCoordX, moveCoordY] >= 0):
@@ -20,48 +19,36 @@ class MiniBoard:
         
 
     def checkForWin(self):
-        self.isResolved, self.Winner = self.checkRows()
+        self.isResolved = self.checkRows()
         if(not self.isResolved):
-            self.isResolved, self.Winner = self.checkColumns()
+            self.isResolved  = self.checkColumns()
             if(not self.isResolved):
-                self.isResolved, self.Winner = self.checkDiagonal()
+                self.isResolved  = self.checkDiagonal()
         return self.isResolved
         
 
     def checkRows(self):
-        winner = -1
         isWin = False
         for index in range(0,3):
             isWin = self.Board[index,0] == self.Board[index,2] and self.Board[index,0] == self.Board[index,1]
             if isWin:
-                winner = self.Board[index,0]
                 break
-        return isWin, winner
+        return isWin
 
 
 
     def checkColumns(self):
-        winner = -1
         isWin = False
         for index in range(0,3):
             isWin = self.Board[0,index] == self.Board[2, index] and self.Board[0, index] == self.Board[1, index]
             if isWin:
-                winner = self.Board[0,index]
                 break
-        return isWin, winner
+        return isWin
 
     def checkDiagonal(self):
-        winner = -1
         isWin = False
-        isWin = self.Board[0,0] == self.Board[2, 2] and self.Board[0, 0] == self.Board[1, 1]
-        if isWin:
-            winner = self.Board[0,0]
-            return isWin, winner
-
-        isWin = self.Board[0,2] == self.Board[2, 0] and self.Board[0, 2] == self.Board[1, 1]
-        if isWin:
-            winner = self.Board[0,2]
-        return isWin, winner
+        isWin = (self.Board[0,0] == self.Board[2, 2] and self.Board[0, 0] == self.Board[1, 1]) or (self.Board[0,2] == self.Board[2, 0] and self.Board[0, 2] == self.Board[1, 1])
+        return isWin
 
     
 
